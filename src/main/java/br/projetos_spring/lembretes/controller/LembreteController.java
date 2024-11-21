@@ -37,4 +37,11 @@ public class LembreteController {
         var lembrete = this.repository.getReferenceById(dados.id());
         lembrete.atualizarLembrete(dados);
     }
+
+    @DeleteMapping("/{id}")
+    @Transactional
+    public void excluir(@PathVariable Long id) {
+        var lembrete = this.repository.getReferenceById(id);
+        this.repository.delete(lembrete);
+    }
 }
