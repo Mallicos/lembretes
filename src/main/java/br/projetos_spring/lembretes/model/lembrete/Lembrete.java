@@ -24,13 +24,22 @@ public class Lembrete {
     public Lembrete(DadosCadastroLembrete dados) {
         this.titulo = dados.titulo();
         this.texto = dados.texto();
-        this.data_criacao_lembrete = dados.data_criacao_lembrete();
+        this.data_criacao_lembrete = dados.data_criacao_lembrete() != null ? dados.data_criacao_lembrete() : LocalDate.now();
         this.data_lembrete = dados.data_lembrete();
     }
 
     public void atualizarLembrete(DadosEdicaoLembrete dados) {
-        this.titulo = dados.titulo();
-        this.texto = dados.texto();
-        this.data_lembrete = dados.data_lembrete();
+
+        if (dados.titulo() != null) {
+            this.titulo = dados.titulo();
+        }
+
+        if (dados.texto() != null) {
+            this.texto = dados.texto();
+        }
+
+        if (dados.data_lembrete() != null) {
+            this.data_lembrete = dados.data_lembrete();
+        }
     }
 }

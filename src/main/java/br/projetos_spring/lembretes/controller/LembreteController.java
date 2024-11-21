@@ -6,6 +6,7 @@ import br.projetos_spring.lembretes.model.lembrete.DadosCadastroLembrete;
 import br.projetos_spring.lembretes.model.lembrete.Lembrete;
 import br.projetos_spring.lembretes.model.lembrete.LembreteRepository;
 import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -22,7 +23,7 @@ public class LembreteController {
 
     @PostMapping
     @Transactional
-    public void cadastrar(@RequestBody DadosCadastroLembrete dados) {
+    public void cadastrar(@RequestBody @Valid DadosCadastroLembrete dados) {
         this.repository.save(new Lembrete(dados));
     }
 
@@ -33,7 +34,7 @@ public class LembreteController {
 
     @PutMapping
     @Transactional
-    public void editar(@RequestBody DadosEdicaoLembrete dados) {
+    public void editar(@RequestBody @Valid DadosEdicaoLembrete dados) {
         var lembrete = this.repository.getReferenceById(dados.id());
         lembrete.atualizarLembrete(dados);
     }
