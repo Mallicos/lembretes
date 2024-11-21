@@ -1,6 +1,7 @@
 package br.projetos_spring.lembretes.controller;
 
-import br.projetos_spring.lembretes.model.DadosListagemLembretes;
+import br.projetos_spring.lembretes.model.lembrete.DadosEdicaoLembrete;
+import br.projetos_spring.lembretes.model.lembrete.DadosListagemLembretes;
 import br.projetos_spring.lembretes.model.lembrete.DadosCadastroLembrete;
 import br.projetos_spring.lembretes.model.lembrete.Lembrete;
 import br.projetos_spring.lembretes.model.lembrete.LembreteRepository;
@@ -28,5 +29,12 @@ public class LembreteController {
     @GetMapping
     public Page<DadosListagemLembretes> listar(@PageableDefault(size = 5, page = 0, sort = {"titulo"}, direction = Sort.Direction.ASC) Pageable page) {
         return this.repository.findAll(page).map(DadosListagemLembretes::new);
+    }
+
+    @PutMapping
+    @Transactional
+    public void editar(@RequestBody DadosEdicaoLembrete dados) {
+        var lembrete = this.repository.getReferenceById(dados.id());
+        lembrete.atualizarLembrete(dados);
     }
 }

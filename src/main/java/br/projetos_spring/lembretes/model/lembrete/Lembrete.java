@@ -18,13 +18,19 @@ public class Lembrete {
     private Long id;
     private String titulo;
     private String texto;
-    private LocalDate dataCriacaoLembrete;
-    private LocalDate dataLembrete;
+    private LocalDate data_criacao_lembrete;
+    private LocalDate data_lembrete;
 
     public Lembrete(DadosCadastroLembrete dados) {
         this.titulo = dados.titulo();
         this.texto = dados.texto();
-        this.dataCriacaoLembrete = dados.dataCriacaoLembrete();
-        this.dataLembrete = dados.dataLembrete();
+        this.data_criacao_lembrete = dados.data_criacao_lembrete();
+        this.data_lembrete = dados.data_lembrete();
+    }
+
+    public void atualizarLembrete(DadosEdicaoLembrete dados) {
+        this.titulo = dados.titulo();
+        this.texto = dados.texto();
+        this.data_lembrete = dados.data_lembrete();
     }
 }
